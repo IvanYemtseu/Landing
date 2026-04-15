@@ -2,9 +2,330 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Backend Developer — Remote</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{--bg:#07090f;--bg2:#0d1117;--bg3:#111827;--border:#1e2d40;--teal:#0be0a0;--amber:#f0a500;--text:#e8edf5;--muted:#6b7a94;--subtle:#3a4a60;--card:#0d1420}
+        html{font-size:16px;scroll-behavior:smooth}
+        body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.35}
+        .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(11,224,160,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(11,224,160,.025) 1px,transparent 1px);background-size:60px 60px}
+        nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 6vw;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(30,45,64,.5);backdrop-filter:blur(12px);background:rgba(7,9,15,.75)}
+        .nav-logo{font-family:'IBM Plex Mono',monospace;font-size:.8rem;color:var(--teal);letter-spacing:.1em}
+        .nav-links{display:flex;gap:2rem;list-style:none}
+        .nav-links a{font-size:.82rem;color:var(--muted);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+        .nav-links a:hover{color:var(--text)}
+        section{position:relative;z-index:1}
+        .hero{min-height:100vh;display:flex;align-items:center;padding:120px 6vw 80px}
+        .hero-inner{max-width:900px}
+        .hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--teal);letter-spacing:.12em;text-transform:uppercase;border:1px solid rgba(11,224,160,.25);padding:6px 14px;border-radius:4px;margin-bottom:32px}
+        .hero-tag::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+        h1{font-family:'Syne',sans-serif;font-size:clamp(3rem,7vw,6rem);font-weight:800;line-height:1.0;letter-spacing:-.03em;margin-bottom:28px}
+        h1 .line2{color:var(--teal)}
+        h1 .line3{-webkit-text-stroke:1px rgba(232,237,245,.3);color:transparent}
+        .hero-sub{font-size:1.1rem;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:48px}
+        .hero-sub strong{color:var(--text);font-weight:500}
+        .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+        .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:6px;font-size:.88rem;font-weight:500;text-decoration:none;letter-spacing:.02em;transition:all .2s;cursor:pointer;border:none}
+        .btn-primary{background:var(--teal);color:#050a08}
+        .btn-primary:hover{background:#0cfbb3;transform:translateY(-1px)}
+        .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+        .btn-ghost:hover{border-color:var(--subtle);background:rgba(255,255,255,.04)}
+        .hero-stats{display:flex;gap:40px;margin-top:64px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap}
+        .stat-num{font-family:'Syne',sans-serif;font-size:2rem;font-weight:700;color:var(--text)}
+        .stat-label{font-size:.78rem;color:var(--muted);margin-top:2px}
+        .marquee-wrap{padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--bg2)}
+        .marquee-inner{display:flex;gap:0;white-space:nowrap;animation:scroll 30s linear infinite}
+        @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+        .marquee-item{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);padding:0 32px;letter-spacing:.1em}
+        .marquee-item span{color:var(--teal)}
+        .section-pad{padding:100px 6vw}
+        .section-label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--teal);letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+        h2{font-family:'Syne',sans-serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.02em;margin-bottom:16px}
+        .section-sub{font-size:1rem;color:var(--muted);max-width:500px;margin-bottom:60px}
+        .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+        .service-card{background:var(--card);padding:36px 32px;transition:background .2s;position:relative;overflow:hidden}
+        .service-card:hover{background:#0f1c2c}
+        .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:0;transition:opacity .3s}
+        .service-card:hover::before{opacity:1}
+        .svc-num{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--subtle);letter-spacing:.15em;margin-bottom:20px}
+        .svc-icon{font-size:1.6rem;margin-bottom:16px}
+        .svc-title{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:600;margin-bottom:10px}
+        .svc-desc{font-size:.85rem;color:var(--muted);line-height:1.7}
+        .svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+        .tag{font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:rgba(11,224,160,.8);background:rgba(11,224,160,.08);border:1px solid rgba(11,224,160,.18);padding:3px 8px;border-radius:3px}
+        .stack-section{background:var(--bg2)}
+        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+        .stack-item{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .2s}
+        .stack-item:hover{border-color:var(--subtle);transform:translateY(-2px)}
+        .stack-item .si-name{font-size:.78rem;font-weight:500;text-align:center}
+        .stack-item .si-type{font-family:'IBM Plex Mono',monospace;font-size:.6rem;color:var(--muted)}
+        .projects-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+        .project-item{background:var(--card);padding:36px 40px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;transition:background .2s}
+        .project-item:hover{background:#0d1828}
+        .proj-badge{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--amber);background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.2);padding:3px 10px;border-radius:3px;margin-bottom:14px}
+        .proj-name{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:700;margin-bottom:10px}
+        .proj-desc{font-size:.88rem;color:var(--muted);max-width:600px;line-height:1.7;margin-bottom:20px}
+        .proj-points{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+        .proj-points li{font-size:.82rem;color:var(--muted);padding-left:16px;position:relative}
+        .proj-points li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:.75rem}
+        .proj-stack{display:flex;flex-wrap:wrap;gap:6px}
+        .proj-link{display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--teal);text-decoration:none;padding:8px 16px;border:1px solid rgba(11,224,160,.25);border-radius:4px;white-space:nowrap;transition:all .2s;flex-shrink:0;height:fit-content}
+        .proj-link:hover{background:rgba(11,224,160,.1)}
+
+        /* GALLERY */
+        .pin-grid{columns:3 180px;column-gap:10px}
+        .pin-item{break-inside:avoid;margin-bottom:10px;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:transform .25s,border-color .25s;position:relative}
+        .pin-item:hover{transform:translateY(-3px);border-color:var(--subtle)}
+        .pin-item img{width:100%;display:block;transition:transform .3s}
+        .pin-item:hover img{transform:scale(1.04)}
+        .pin-item::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,224,160,.07),transparent 60%);opacity:0;transition:opacity .3s}
+        .pin-item:hover::after{opacity:1}
+        .lb{display:none;position:fixed;inset:0;z-index:999;background:rgba(7,9,15,.96);backdrop-filter:blur(10px);align-items:center;justify-content:center}
+        .lb.open{display:flex}
+        .lb img{max-width:90vw;max-height:88vh;border-radius:10px;object-fit:contain;border:1px solid var(--border)}
+        .lb-close{position:fixed;top:22px;right:26px;background:none;border:none;color:var(--muted);font-size:1.6rem;cursor:pointer;transition:color .2s;line-height:1}
+        .lb-close:hover{color:var(--text)}
+
+        .guarantee-section{background:linear-gradient(135deg,rgba(11,224,160,.06),rgba(11,224,160,.02));border-top:1px solid rgba(11,224,160,.15);border-bottom:1px solid rgba(11,224,160,.15)}
+        .guarantee-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px}
+        .g-item{display:flex;flex-direction:column;gap:8px}
+        .g-title{font-family:'Syne',sans-serif;font-weight:600;font-size:1rem}
+        .g-desc{font-size:.82rem;color:var(--muted);line-height:1.65}
+        .contact-inner{max-width:680px;margin:0 auto;text-align:center}
+        .contact-inner h2{font-size:clamp(2rem,4vw,3.2rem)}
+        .contact-inner p{color:var(--muted);margin:16px 0 40px;font-size:1rem}
+        .contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+        .contact-link{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);text-decoration:none;padding:10px 20px;border:1px solid var(--border);border-radius:6px;transition:all .2s}
+        .contact-link:hover{color:var(--text);border-color:var(--subtle);background:rgba(255,255,255,.03)}
+        .response-note{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--subtle);letter-spacing:.08em}
+        footer{padding:32px 6vw;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+        footer p{font-size:.75rem;color:var(--subtle);font-family:'IBM Plex Mono',monospace}
+        .reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        @media(max-width:640px){.hero-stats{gap:24px}.project-item{grid-template-columns:1fr;gap:16px}.nav-links{display:none}.pin-grid{columns:2 140px}}
+    </style>
 </head>
 <body>
+<div class="grid-bg"></div>
 
+<nav>
+    <div class="nav-logo">// springboot-guy.xyz</div>
+    <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#stack">Stack</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-tag">Available for remote work</div>
+        <h1>
+            <div>Java Backend</div>
+            <div class="line2">Developer.</div>
+            <div class="line3">Full Remote.</div>
+        </h1>
+        <p class="hero-sub">I build <strong>production-grade APIs, payment systems, and secure backends</strong> with Java 21 &amp; Spring Boot 3. From zero to Dockerised VPS deployment. Clean code, real deadlines, no excuses.</p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Get in touch →</a>
+            <a href="#projects" class="btn btn-ghost">See my work</a>
+        </div>
+        <div class="hero-stats">
+            <div><div class="stat-num">2+</div><div class="stat-label">Years production experience</div></div>
+            <div><div class="stat-num">3</div><div class="stat-label">Languages (RU / PL / EN)</div></div>
+            <div><div class="stat-num">&lt;1h</div><div class="stat-label">Average response time</div></div>
+            <div><div class="stat-num">100%</div><div class="stat-label">Remote, any timezone</div></div>
+        </div>
+    </div>
+</section>
+
+<div class="marquee-wrap">
+    <div class="marquee-inner">
+        <span class="marquee-item">Java 21 <span>·</span></span><span class="marquee-item">Spring Boot 3.x <span>·</span></span><span class="marquee-item">Spring Security <span>·</span></span><span class="marquee-item">JWT Auth <span>·</span></span><span class="marquee-item">PostgreSQL <span>·</span></span><span class="marquee-item">Docker <span>·</span></span><span class="marquee-item">REST API <span>·</span></span><span class="marquee-item">JPA / Hibernate <span>·</span></span><span class="marquee-item">Nginx <span>·</span></span><span class="marquee-item">OpenAPI <span>·</span></span><span class="marquee-item">TDD <span>·</span></span><span class="marquee-item">Rate Limiting <span>·</span></span><span class="marquee-item">Java 21 <span>·</span></span><span class="marquee-item">Spring Boot 3.x <span>·</span></span><span class="marquee-item">Spring Security <span>·</span></span><span class="marquee-item">JWT Auth <span>·</span></span><span class="marquee-item">PostgreSQL <span>·</span></span><span class="marquee-item">Docker <span>·</span></span><span class="marquee-item">REST API <span>·</span></span><span class="marquee-item">JPA / Hibernate <span>·</span></span><span class="marquee-item">Nginx <span>·</span></span><span class="marquee-item">OpenAPI <span>·</span></span><span class="marquee-item">TDD <span>·</span></span>
+    </div>
+</div>
+
+<section class="section-pad" id="services">
+    <div class="section-label">// what i build</div>
+    <h2>Services</h2>
+    <p class="section-sub">Three things I do well. All delivered remotely. All with source code and documentation.</p>
+    <div class="services-grid reveal">
+        <div class="service-card">
+            <div class="svc-num">01</div>
+            <div class="svc-icon">⚡</div>
+            <div class="svc-title">Backend API Development</div>
+            <p class="svc-desc">Full REST API from scratch — schema design, JWT auth, role-based access, validation, error handling, Swagger docs. Production-ready on day one.</p>
+            <div class="svc-tags"><span class="tag">Spring Boot</span><span class="tag">JWT</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div>
+        </div>
+        <div class="service-card">
+            <div class="svc-num">02</div>
+            <div class="svc-icon">🔐</div>
+            <div class="svc-title">Security &amp; Fraud Prevention</div>
+            <p class="svc-desc">Payment gateway integration, webhook handling, rate limiting, audit logging, reCAPTCHA, Sentry monitoring. Built this stack end-to-end commercially.</p>
+            <div class="svc-tags"><span class="tag">Bucket4j</span><span class="tag">Stripe webhooks</span><span class="tag">Audit Logging</span><span class="tag">Sentry</span></div>
+        </div>
+        <div class="service-card">
+            <div class="svc-num">03</div>
+            <div class="svc-icon">🐛</div>
+            <div class="svc-title">Bug Fixing &amp; Debugging</div>
+            <p class="svc-desc">Spring Boot crashes, JPA N+1, auth issues, Docker failures, performance problems. I find the root cause — not just the symptom. Fixed or no charge.</p>
+            <div class="svc-tags"><span class="tag">Any Spring version</span><span class="tag">Root cause analysis</span><span class="tag">Fast turnaround</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="section-pad stack-section" id="stack">
+    <div class="section-label">// tech stack</div>
+    <h2>What I work with</h2>
+    <p class="section-sub">Tools I've shipped to production, not just read about.</p>
+    <div class="stack-grid reveal">
+        <div class="stack-item"><span style="font-size:1.4rem">☕</span><span class="si-name">Java 21</span><span class="si-type">Core</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🍃</span><span class="si-name">Spring Boot 3.x</span><span class="si-type">Framework</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🔒</span><span class="si-name">Spring Security</span><span class="si-type">Auth</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🐘</span><span class="si-name">PostgreSQL</span><span class="si-type">Database</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🐳</span><span class="si-name">Docker</span><span class="si-type">DevOps</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🔁</span><span class="si-name">Flyway</span><span class="si-type">Migrations</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">📡</span><span class="si-name">REST / OpenAPI</span><span class="si-type">API Design</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🌐</span><span class="si-name">Nginx</span><span class="si-type">Infra</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🧪</span><span class="si-name">JUnit 5 / Mockito</span><span class="si-type">Testing</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">📊</span><span class="si-name">Sentry</span><span class="si-type">Monitoring</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">⚙️</span><span class="si-name">Maven / Gradle</span><span class="si-type">Build</span></div>
+        <div class="stack-item"><span style="font-size:1.4rem">🔗</span><span class="si-name">Webhooks / SMTP</span><span class="si-type">Integrations</span></div>
+    </div>
+</section>
+
+<section class="section-pad" id="projects">
+    <div class="section-label">// projects</div>
+    <h2>Selected work</h2>
+    <p class="section-sub">Two projects built end-to-end. Real requirements, real deployment.</p>
+    <div class="projects-list reveal">
+        <div class="project-item">
+            <div>
+                <div class="proj-badge">Commercial · 5+ months · Full Cycle</div>
+                <div class="proj-name">Elixir SportShop — E-commerce Platform</div>
+                <p class="proj-desc">Full-cycle e-commerce backend: product catalog, cart, order lifecycle, payments, fraud prevention, and monitoring. Deployed on Linux VPS with Docker Compose and Nginx.</p>
+                <ul class="proj-points">
+                    <li>JWT auth with role-based access (customer / admin), Flyway migrations</li>
+                    <li>Payment gateway integration with webhook handling and full transaction audit log</li>
+                    <li>Fraud layer: rate limiting (Bucket4j), reCAPTCHA v3, request validation, Sentry</li>
+                    <li>Multi-service Docker Compose + Nginx reverse proxy + multi-stage builds</li>
+                    <li>Integrated Cloudinary, Telegram Bot alerts, SMTP — plus Next.js frontend</li>
+                </ul>
+                <div class="proj-stack"><span class="tag">Java 21</span><span class="tag">Spring Boot 3.x</span><span class="tag">PostgreSQL</span><span class="tag">JWT</span><span class="tag">Bucket4j</span><span class="tag">Docker</span><span class="tag">Nginx</span><span class="tag">Sentry</span></div>
+            </div>
+            <a href="https://github.com/IvanYemtseu" class="proj-link" target="_blank">GitHub ↗</a>
+        </div>
+        <div class="project-item">
+            <div>
+                <div class="proj-badge">Team · Backend · Deputy Scrum Master · Diploma</div>
+                <div class="proj-name">Wdrozeniowy — Full-Stack Monorepo</div>
+                <p class="proj-desc">Three-service monorepo (Java backend, Next.js frontend, Node.js gateway) built as a team diploma project. Backend + deputy Scrum Master role in parallel.</p>
+                <ul class="proj-points">
+                    <li>REST API + database schema in Spring Boot 3 with Spring Security and JWT</li>
+                    <li>Docker + Docker Compose for all services; WebSocket (Socket.io) between gateway and clients</li>
+                    <li>Business logic covered with JUnit 5 + Mockito, TDD approach</li>
+                </ul>
+                <div class="proj-stack"><span class="tag">Java 17</span><span class="tag">Spring Boot 3.x</span><span class="tag">H2</span><span class="tag">JWT</span><span class="tag">Socket.io</span><span class="tag">Docker</span><span class="tag">JUnit 5</span></div>
+            </div>
+            <a href="https://github.com/IvanYemtseu" class="proj-link" target="_blank">GitHub ↗</a>
+        </div>
+    </div>
+</section>
+
+<!--
+  ╔══════════════════════════════════════════════════════╗
+  ║  GALLERY — как добавить фото с Pinterest:            ║
+  ║  1. Открой пин                                       ║
+  ║  2. ПКМ на картинке → "Открыть в новой вкладке"      ║
+  ║  3. Скопируй URL (https://i.pinimg.com/...)          ║
+  ║  4. Вставь тег ниже:                                 ║
+  ║     <img src="ССЫЛКА" alt="описание">                ║
+  ╚══════════════════════════════════════════════════════╝
+-->
+<section class="section-pad" id="gallery" style="background:var(--bg2)">
+    <div class="section-label">// inspiration</div>
+    <h2>Visual References</h2>
+    <p class="section-sub">Design inspiration and UI references.</p>
+    <div class="pin-grid reveal" id="pinGrid">
+        <img src="https://i.pinimg.com/736x/56/bc/49/56bc49c3235b3b58cbc04c2e477f2951.jpg" alt="Example">
+        <img src="https://i.pinimg.com/736x/59/64/79/596479012dfaa88a34137b75bdee492a.jpg" alt="Example">
+        <img src="https://i.pinimg.com/736x/53/c2/51/53c251a7989429b73796fed8edb1d20b.jpg" alt="Example">
+        <!-- Вставляй сюда img теги с Pinterest ссылками -->
+        <!-- Пример: <img src="https://i.pinimg.com/736x/ab/cd/ef/abcdef123456.jpg" alt="Dark UI design"> -->
+
+    </div>
+</section>
+
+<div class="lb" id="lb">
+    <button class="lb-close" id="lbClose">✕</button>
+    <img id="lbImg" src="" alt="">
+</div>
+
+<section class="section-pad guarantee-section">
+    <div class="section-label">// working with me</div>
+    <h2 style="margin-bottom:48px">What you can expect</h2>
+    <div class="guarantee-grid reveal">
+        <div class="g-item"><div class="g-title">Honest scoping</div><div class="g-desc">I'll tell you upfront if something isn't feasible or will take longer than you expect. No surprises after you've paid.</div></div>
+        <div class="g-item"><div class="g-title">Clean, documented code</div><div class="g-desc">You receive commented, readable code. Not a black box. You should be able to maintain it without me.</div></div>
+        <div class="g-item"><div class="g-title">Remote-native workflow</div><div class="g-desc">Async by default. GitHub for code, clear updates, no need to sync timezones for every question.</div></div>
+        <div class="g-item"><div class="g-title">Under 1-hour responses</div><div class="g-desc">During working hours, I respond fast. If I'm unavailable, I'll say so in advance.</div></div>
+    </div>
+</section>
+
+<section class="section-pad" id="contact">
+    <div class="contact-inner">
+        <div class="section-label">// let's work together</div>
+        <h2>Have a project?<br>Let's talk.</h2>
+        <p>Available for full-time remote positions and freelance contracts. Response within 1 hour.</p>
+        <div class="contact-links">
+            <a href="mailto:Ivan.Yemtseu@icloud.com" class="contact-link">✉ Ivan.Yemtseu@icloud.com</a>
+            <a href="https://linkedin.com/in/ivan-yemtseu" class="contact-link" target="_blank">in LinkedIn</a>
+            <a href="https://github.com/IvanYemtseu" class="contact-link" target="_blank">⌨ GitHub</a>
+        </div>
+        <p class="response-note">// Typically respond within 60 minutes · Remote worldwide</p>
+    </div>
+</section>
+
+<footer>
+    <p>// Java Backend Developer — Remote</p>
+    <p>Java · Spring Boot · PostgreSQL · Docker</p>
+</footer>
+
+<script>
+    // Scroll reveal
+    const obs = new IntersectionObserver(
+        es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }),
+        {threshold:0.1}
+    );
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Wrap each img in .pin-grid into a .pin-item with lightbox
+    document.querySelectorAll('#pinGrid img').forEach(img => {
+        const div = document.createElement('div');
+        div.className = 'pin-item';
+        img.parentNode.insertBefore(div, img);
+        div.appendChild(img);
+        div.onclick = () => {
+            document.getElementById('lbImg').src = img.src;
+            document.getElementById('lb').classList.add('open');
+        };
+    });
+
+    document.getElementById('lbClose').onclick = () =>
+        document.getElementById('lb').classList.remove('open');
+    document.getElementById('lb').addEventListener('click', function(e) {
+        if(e.target === this) this.classList.remove('open');
+    });
+    document.addEventListener('keydown', e => {
+        if(e.key === 'Escape') document.getElementById('lb').classList.remove('open');
+    });
+</script>
 </body>
 </html>
