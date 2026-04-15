@@ -76,26 +76,17 @@ Transformed the portfolio into a **HR-optimized "SEO bomb"** to attract recruite
 
 ---
 
-## 📥 Interactive Features
+## 📥 Contact Methods
 
-### 1. **Resume Download**
-- Generates TXT file with:
-  - Personal info & contact
-  - Professional summary
-  - Core skills (15+ technologies)
-  - Work experience
-  - Availability & compensation
-  - Languages & preferences
-
-### 2. **Work Preferences Download**
-- Generates JSON file with:
-  - Profile links (LinkedIn, GitHub)
-  - Job title & experience
-  - Availability & timezone
-  - Compensation details (full-time & freelance)
-  - Complete skills list
-  - Work preferences & restrictions
-  - Timestamp (auto-generated)
+### Direct Contacts:
+- **Email**: Ivan.Yemtseu@icloud.com
+- **Telegram**: @emtsevv (fastest way to reach)
+- **LinkedIn**: linkedin.com/in/ivan-yemtseu
+- **GitHub**: github.com/IvanYemtseu
+- **Resume Files**: 
+  - English (CV_IVAN_EN.pdf)
+  - Polish (CV_IVAN_PL.pdf)  
+  - Russian (Ivan_Yemtseu_RU.pdf)
 
 ---
 
