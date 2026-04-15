@@ -584,23 +584,11 @@
 
         <div class="contact-links" style="margin-bottom:32px">
             <a href="mailto:Ivan.Yemtseu@icloud.com" class="contact-link" style="background:rgba(11,224,160,.15); border-color:var(--teal)">✉ Ivan.Yemtseu@icloud.com</a>
+            <a href="https://t.me/emtsevv" class="contact-link" target="_blank">✈ Telegram @emtsevv</a>
             <a href="https://linkedin.com/in/ivan-yemtseu" class="contact-link" target="_blank">🔗 LinkedIn Profile</a>
             <a href="https://github.com/IvanYemtseu" class="contact-link" target="_blank">⌨ GitHub Portfolio</a>
         </div>
 
-        <!-- HR Resources -->
-        <div style="background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:24px; margin-bottom:32px">
-            <div style="font-family:'IBM Plex Mono',monospace; font-size:.7rem; color:var(--teal); letter-spacing:.1em; text-transform:uppercase; margin-bottom:16px">FOR HR TEAMS</div>
-            <p style="color:var(--muted); font-size:.9rem; margin-bottom:16px">Get structured information about my background, skills, and availability:</p>
-            <div style="display:flex; gap:12px; flex-wrap:wrap">
-                <button onclick="downloadResume()" style="padding:10px 20px; background:var(--teal); color:#050a08; border:none; border-radius:6px; font-weight:500; cursor:pointer; font-size:.85rem; transition:all .2s" onmouseover="this.style.background='#0cfbb3'" onmouseout="this.style.background='var(--teal)'">
-                    📄 Download Resume (PDF)
-                </button>
-                <button onclick="downloadPreference()" style="padding:10px 20px; background:transparent; color:var(--text); border:1px solid var(--border); border-radius:6px; font-weight:500; cursor:pointer; font-size:.85rem; transition:all .2s" onmouseover="this.style.borderColor='var(--subtle)'" onmouseout="this.style.borderColor='var(--border)'">
-                    📋 Work Preferences (JSON)
-                </button>
-            </div>
-        </div>
 
         <p class="response-note">// Typically respond within 60 minutes · Remote worldwide · Open to relocation discussions</p>
     </div>
@@ -700,128 +688,7 @@
         if(e.key === 'Escape') document.getElementById('lb').classList.remove('open');
     });
 
-    // HR Document Downloads
-    function downloadResume() {
-        // Generate a simple resume JSON/PDF
-        const resumeData = `
-NAME: Ivan Yemtseu
-EMAIL: Ivan.Yemtseu@icloud.com
-PHONE: [Available on request]
-LOCATION: Remote, Worldwide
-
-PROFESSIONAL SUMMARY:
-Java Backend Developer with 2+ years of commercial experience building production-grade APIs, payment systems, and scalable infrastructure. Specialized in Spring Boot 3, Java 21, PostgreSQL, and Docker. Remote-first engineer delivering clean, documented code on deadline.
-
-CORE SKILLS:
-• Java 21, Spring Boot 3.x, Spring Security
-• REST API Design, JWT Authentication, OpenAPI
-• PostgreSQL, JPA/Hibernate, Database Design
-• Docker, Nginx, Linux VPS Deployment
-• Payment Integrations (Stripe, webhooks)
-• Rate Limiting (Bucket4j), Fraud Prevention
-• TDD, JUnit 5, Mockito
-• Sentry Monitoring, Audit Logging
-
-WORK EXPERIENCE:
-
-FULL-TIME AVAILABILITY:
-$2,500 - $3,500/month
-Remote, any timezone
-<1 hour response time
-Start: Available immediately (next week)
-
-FREELANCE/CONTRACT:
-$35 - $45/hour
-2-week to 6-month engagements
-Per-project or hourly rates
-
-LANGUAGES:
-Russian (Native), Polish (Professional), English (Professional)
-
-AVAILABILITY:
-Immediate - Open to start next week
-Timezone: UTC+1 to UTC+8 preferred
-Contract: Minimum 2 weeks, no upper limit
-
-PREFERENCE SUMMARY:
-• SaaS, fintech, e-commerce, B2B projects
-• Full backend or full-stack roles
-• Async-first teams, flexible hours
-• NOT interested: Crypto, gambling, MLM
-        `.trim();
-
-        const blob = new Blob([resumeData], { type: 'text/plain' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Ivan-Yemtseu-Resume.txt';
-        a.click();
-        window.URL.revokeObjectURL(url);
-    }
-
-    function downloadPreference() {
-        // Generate work preference JSON
-        const preferenceData = {
-            name: "Ivan Yemtseu",
-            email: "Ivan.Yemtseu@icloud.com",
-            profile: "https://springboot-guy.xyz/",
-            linkedin: "https://linkedin.com/in/ivan-yemtseu",
-            github: "https://github.com/IvanYemtseu",
-            jobTitle: "Java Backend Developer",
-            experience: "2+ years production",
-            availability: "Immediate",
-            employmentTypes: ["FULL_TIME", "FREELANCE", "CONTRACT"],
-            compensation: {
-                fullTime: {
-                    currency: "USD",
-                    min: 2500,
-                    max: 3500,
-                    period: "month"
-                },
-                freelance: {
-                    currency: "USD",
-                    min: 35,
-                    max: 45,
-                    period: "hour"
-                }
-            },
-            workLocation: "Remote, Worldwide",
-            timezone: "UTC+1 to UTC+8 (flexible)",
-            languages: ["Russian (Native)", "Polish (Professional)", "English (Professional)"],
-            skills: [
-                "Java 21", "Spring Boot 3.x", "Spring Security",
-                "REST API", "JWT", "PostgreSQL", "Docker",
-                "Nginx", "Maven", "Gradle", "JUnit 5",
-                "Mockito", "Sentry", "OpenAPI", "TDD"
-            ],
-            preferences: {
-                industries: ["SaaS", "Fintech", "E-commerce", "B2B"],
-                projectTypes: ["Backend", "Full-Stack", "Architecture"],
-                minimumContractLength: "2 weeks",
-                responseTime: "<1 hour"
-            },
-            notInterested: ["Cryptocurrency", "Gambling", "MLM"],
-            benefits: [
-                "Clean, documented code",
-                "Source code ownership",
-                "GitHub repository",
-                "Weekly progress updates",
-                "Flexible hours (async-first)",
-                "Any timezone support"
-            ],
-            generatedAt: new Date().toISOString()
-        };
-
-        const blob = new Blob([JSON.stringify(preferenceData, null, 2)], { type: 'application/json' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Ivan-Yemtseu-Work-Preferences-${new Date().toISOString().split('T')[0]}.json`;
-        a.click();
-        window.URL.revokeObjectURL(url);
-    }
-
-    // Track page views for HR/Recruiter
+    // Track page views
     if (typeof gtag !== 'undefined') {
         gtag('event', 'page_view', {
             'page_title': document.title,
